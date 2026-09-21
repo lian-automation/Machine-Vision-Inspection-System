@@ -79,8 +79,8 @@ python simulator/synth.py --count 20 --defects --seed 42
 :: 3) 批量验收：500 帧 → 检出率/误报率/混淆矩阵/节拍 → docs/测试报告.md
 python run_batch.py --save-annot 6
 
-:: 3.5) 单元测试（标准库 unittest 框架；用例依赖 OpenCV/NumPy，
-::      需先完成上面的 pip install -r requirements.txt）：
+:: 3.5) 单元测试（标准库 unittest 框架，全量 52 项用例；
+::      用例依赖 OpenCV/NumPy，需先完成上面的 pip install -r requirements.txt）：
 python -m unittest discover -s tests
 
 :: 3.6) 工件↔文档数字一致性自检（重跑批量后必须执行，防止 README/
