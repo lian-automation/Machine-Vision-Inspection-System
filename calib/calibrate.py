@@ -323,7 +323,7 @@ def measure_mm_per_pixel(K_est: np.ndarray, dist_est: np.ndarray) -> float:
     Z = K[0, 0] * config.MM_PER_PIXEL          # 80 mm
     rvec = np.zeros(3, np.float64)
     tvec = np.array([-BOARD_W_MM / 2, -BOARD_H_MM / 2, Z], np.float64)
-    objp = object_points_mm()
+    # 说明：本函数走代数投影（K/R/tvec），不使用棋盘格物点表 object_points_mm()
 
     R, _ = cv2.Rodrigues(rvec)
     H = K @ np.column_stack([R[:, 0] / FLAT_SCALE,

@@ -34,7 +34,6 @@ dashboard/app.py —— 生产看板服务（Flask + ECharts）
       演示数据量（数千条内）下开销可忽略，工程上可改为按字节偏移增量读。
 """
 import json
-import time
 from collections import Counter
 from pathlib import Path
 

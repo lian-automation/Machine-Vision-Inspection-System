@@ -47,7 +47,7 @@ import config
 # 本模块 import 它做下游组合：叠加缺陷注入与随机化，合成测试帧。
 # 生产算法（locate/inspect）直接 import part_model，不经由本模块。
 from part_model import (bolt_centers_canonical, keyway_center_canonical,
-                        keyway_polygon, pose_matrix, apply_affine,
+                        pose_matrix, apply_affine,
                         face_ring_value, illumination_field, make_belt,
                         build_part)
 

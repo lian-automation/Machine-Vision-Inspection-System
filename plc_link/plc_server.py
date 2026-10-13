@@ -46,14 +46,12 @@ import logging
 import sys
 import threading
 import time
-from datetime import datetime
 from pathlib import Path
 
 # 允许直接 `python plc_link/plc_server.py` 运行：项目根目录加入 sys.path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import numpy as np
-import cv2
 
 import config
 # 注意：不要用 pymodbus.server.StartTcpServer —— 它内部是
@@ -74,7 +72,6 @@ except ImportError as exc:  # 把晦涩的 ImportError 翻译成可执行的行�
         "请执行: pip install 'pymodbus==3.6.9'"
     ) from exc
 from simulator.synth import synth_frame
-from locate.locate import locate
 import vision_pipeline as vp
 
 # pymodbus 自身日志非常啰嗦，压到 WARNING
@@ -211,7 +208,7 @@ class VisionService:
         defect_code = vp.defect_code_of(result)
         with self._lock:
             if self._faulted:                  # 迟到结果作废，不得覆盖 999
-                print(f"[VISION] 处理完成但看门狗已判故障，本次结果作废")
+                print("[VISION] 处理完成但看门狗已判故障，本次结果作废")
                 return
             self.write_reg(config.REG_RESULT,
                            config.RESULT_OK if result["result"] == "OK"

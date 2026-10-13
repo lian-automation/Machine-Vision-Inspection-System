@@ -119,8 +119,8 @@ def main() -> None:
     client = ModbusTcpClient(args.host, port=args.port)
     print(f"连接 Modbus/TCP 从站 {args.host}:{args.port} ...")
     if not client.connect():
-        print(f"[FAIL] 无法连接——请先在另一个终端运行 "
-              f"python plc_link/plc_server.py")
+        print("[FAIL] 无法连接——请先在另一个终端运行 "
+              "python plc_link/plc_server.py")
         sys.exit(1)
     report("连接从站", True, f"{args.host}:{args.port}")
 
