@@ -63,9 +63,16 @@ import config
 # 正确做法：专用线程内自建事件循环 → 构造 ModbusTcpServer（其构造器要求
 # 已有 running loop）→ await serve_forever()；停止时用
 # run_coroutine_threadsafe 调 shutdown() 协程。
-from pymodbus.server import ModbusTcpServer
-from pymodbus.datastore import (ModbusSequentialDataBlock, ModbusSlaveContext,
-                                ModbusServerContext)
+try:
+    from pymodbus.server import ModbusTcpServer
+    from pymodbus.datastore import (ModbusSequentialDataBlock, ModbusSlaveContext,
+                                    ModbusServerContext)
+except ImportError as exc:  # 把晦涩的 ImportError 翻译成可执行的行动指令
+    raise ImportError(
+        "检测到不兼容或缺失的 pymodbus（本仓按 3.6.x 数据存储 API 开发："
+        "需要 ModbusSlaveContext，3.7+ 已移除该类）。"
+        "请执行: pip install 'pymodbus==3.6.9'"
+    ) from exc
 from simulator.synth import synth_frame
 from locate.locate import locate
 import vision_pipeline as vp
